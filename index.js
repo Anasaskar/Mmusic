@@ -1,14 +1,14 @@
 const TOKEN = process.env.token;
 
-
 const Discord = require("discord.js");
 const REST = Discord.REST;
 const Routes = Discord.Routes;
 const player = require("./player");
-const client = new Client({
+const client = new Discord.Client({
   intents: [
     ...(Object.keys(Discord.IntentsBitField.Flags).filter((k) => !(Number(k) > 0)))
   ]
+
 });
 
 client.login(TOKEN);
@@ -52,7 +52,7 @@ client.on("ready", async () => {
     ].map((k) => k.toJSON())
   });
 
-  console.log("✅ Slash Commands Loaded Successfully");
+  console.log("âœ… Slash Commands Loaded Successfully");
   console.log("\nPLEASE HIDE YOUR TOKEN BEFORE SOMEONE MISUSES IT -> https://youtu.be/z_NSEb-nhjg");
 });
 
@@ -60,7 +60,7 @@ client.on("interactionCreate", async (i) => {
   await i.deferReply();
   if (i.isCommand()) {
 
-
+    //THE PLAY COMMAND
     if (i.commandName == "play") {
       const voice = i.member?.voice;
 
@@ -177,7 +177,7 @@ client.on("interactionCreate", async (i) => {
 
 
       }
-      
+      //THE LEAVE COMMAND
     } else if (i.commandName == "leave") {
       await player.leave();
 
@@ -188,7 +188,7 @@ client.on("interactionCreate", async (i) => {
         }],
       });
     }
-  
+    //THE VOLUME COMMAND
     else if (i.commandName == "volume") {
       const volumeLevel = i.options.getInteger("level");
       if (volumeLevel > 10) {
@@ -239,7 +239,7 @@ client.on("interactionCreate", async (i) => {
           })
         }
       }
-
+      //THE PAUSE COMMAND
     } else if (i.commandName == "pause") {
       try {
 
@@ -270,7 +270,7 @@ client.on("interactionCreate", async (i) => {
         });
       }
     }
-
+    //THE RESUME COMMAND
     else if (i.commandName == "resume") {
       try {
         if (!player.isPlaying()) {
@@ -351,7 +351,3 @@ client.on("interactionCreate", async (i) => {
     }
   }
 });
-
-
-
-
