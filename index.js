@@ -1,25 +1,17 @@
-// JOIN THE SERVER IF YOU NEED ANY HELP REGARDING THE BOT -> https://discord.gg/VRpY9PbuXF
-
-// INSERT YOUR BOT TOKEN BELOW
-
-
 const TOKEN = process.env.token;
-//GUYS SERVERS ARE GETTING NUKED IF YOU LEAVE YOUR TOKEN OUT IN THE OPEN, PLEASE TAKE CARE TO HIDE YOUR TOKEN USING THIS VIDEO:
-//https://youtu.be/z_NSEb-nhjg
+
 
 const Discord = require("discord.js");
 const REST = Discord.REST;
 const Routes = Discord.Routes;
 const player = require("./player");
-const client = new Discord.Client({
+const client = new Client({
   intents: [
     ...(Object.keys(Discord.IntentsBitField.Flags).filter((k) => !(Number(k) > 0)))
   ]
-
 });
 
 client.login(TOKEN);
-//PUT THE 24/7 CODE BELOW THIS LINE
 
 client.on("ready", async () => {
   console.log(`${client.user.username} is ready!`);
@@ -68,7 +60,7 @@ client.on("interactionCreate", async (i) => {
   await i.deferReply();
   if (i.isCommand()) {
 
-    //THE PLAY COMMAND
+
     if (i.commandName == "play") {
       const voice = i.member?.voice;
 
@@ -185,7 +177,7 @@ client.on("interactionCreate", async (i) => {
 
 
       }
-      //THE LEAVE COMMAND
+      
     } else if (i.commandName == "leave") {
       await player.leave();
 
@@ -196,7 +188,7 @@ client.on("interactionCreate", async (i) => {
         }],
       });
     }
-    //THE VOLUME COMMAND
+  
     else if (i.commandName == "volume") {
       const volumeLevel = i.options.getInteger("level");
       if (volumeLevel > 10) {
@@ -247,7 +239,7 @@ client.on("interactionCreate", async (i) => {
           })
         }
       }
-      //THE PAUSE COMMAND
+
     } else if (i.commandName == "pause") {
       try {
 
@@ -278,7 +270,7 @@ client.on("interactionCreate", async (i) => {
         });
       }
     }
-    //THE RESUME COMMAND
+
     else if (i.commandName == "resume") {
       try {
         if (!player.isPlaying()) {
@@ -356,7 +348,10 @@ client.on("interactionCreate", async (i) => {
 
 
       });
-      await i.user.send('Here\'s the server link if you need any help: https://discord.gg/VRpY9PbuXF')
     }
   }
 });
+
+
+
+
